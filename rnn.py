@@ -78,4 +78,4 @@ class RNN(nn.Module):
         test_loss = epoch_loss / len(test_iterator)
         test_acc = epoch_acc / len(test_iterator)
 
-        return test_loss, test_loss 
+        return test_loss, test_acc 

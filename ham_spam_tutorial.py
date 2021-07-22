@@ -82,7 +82,7 @@ input_dim = len(TEXT.vocab)
 embedding_dim = 100
 hidden_dim = 256
 output_dim = 1 # 0 = Ham; 1 = Spam
-nn_type = "lstm" # or rnn for normal
+nn_type = "rnn" # or rnn for normal
 
 model = rnn.RNN(input_dim, embedding_dim, hidden_dim, output_dim, nn_type)
 optimizer = optim.Adam(model.parameters(), lr=1e-6) # Adam optimizer with learning rate 1 x 10^-6
