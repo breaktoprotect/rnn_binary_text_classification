@@ -79,3 +79,18 @@ class RNN(nn.Module):
         test_acc = epoch_acc / len(test_iterator)
 
         return test_loss, test_acc 
+
+
+    #? EXPERIMENTAL
+    @staticmethod
+    def predict(model, TEXT, sentence):
+        import spacy
+        nlp = spacy.load('en_core_web_sm')
+        tokenized = [tok.text for tok in nlp.tokenizer(sentence)]  #tokenize the sentence 
+        indexed = [TEXT.vocab.stoi[t] for t in tokenized]          #convert to integer sequence
+        length = [len(indexed)]                                    #compute no. of words
+        tensor = torch.LongTensor(indexed)                         #convert to tensor
+        tensor = tensor.unsqueeze(1)                             #reshape in form of batch,no. of words
+        length_tensor = torch.LongTensor(length)                   #convert to tensor
+        prediction = torch.sigmoid(model(tensor))                  #prediction 
+        return prediction.item()         
